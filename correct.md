@@ -521,7 +521,7 @@ I driver/memory/mmio_address_space.cc:82] UnmapMemory() page-aligned : device_ad
 I driver/kernel/kernel_registers.cc:122] Closing /dev/apex_0. mmap_offset=0x0000000000040000, mmap_size=4096, read_only=0
 I driver/kernel/kernel_registers.cc:122] Closing /dev/apex_0. mmap_offset=0x0000000000044000, mmap_size=4096, read_only=0
 I driver/kernel/kernel_registers.cc:122] Closing /dev/apex_0. mmap_offset=0x0000000000048000, mmap_size=4096, read_only=0
-pi@pi5-coral:~/pycoral $
+:~/pycoral $
 
 
 
