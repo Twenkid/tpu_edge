@@ -1,3 +1,14 @@
+https://www.reddit.com/r/VFIO/comments/l5awg0/using_google_coral_mpcie_tpu_in_qemu_vm/
+
+https://coral.ai/docs/edgetpu/faq/#what-is-the-edge-tpu
+
+https://coral.ai/docs/edgetpu/tflite-python/#run-an-inference-with-the-pycoral-api
+
+https://www.reddit.com/r/VFIO/comments/l5awg0/using_google_coral_mpcie_tpu_in_qemu_vm/
+
+https://github.com/google-coral/edgetpu/issues/491
+
+
 ```
 :~/pycoral $ python3 examples/classify_image.py   --model test_data/mobilenet_v2_1.0_224_inat_bird_quant_edgetpu.tflite   --labels test_data/inat_bird_labels.txt   --input test_data/parrot.jpg
 I tflite/edgetpu_manager_direct.cc:453] No matching device is already opened for shared ownership.
