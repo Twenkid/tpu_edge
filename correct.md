@@ -1,3 +1,7 @@
+https://github.com/google-coral/pycoral/blob/master/examples/classify_image.py#L41
+
+https://github.com/google-coral/pycoral/tree/master/examples
+
 https://www.reddit.com/r/VFIO/comments/l5awg0/using_google_coral_mpcie_tpu_in_qemu_vm/
 
 https://coral.ai/docs/edgetpu/faq/#what-is-the-edge-tpu
