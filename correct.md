@@ -8,6 +8,10 @@ https://www.reddit.com/r/VFIO/comments/l5awg0/using_google_coral_mpcie_tpu_in_qe
 
 https://github.com/google-coral/edgetpu/issues/491
 
+https://serverfault.com/questions/226319/what-does-pcie-aspm-do
+https://serverfault.com/questions/810411/setting-pcie-aspm-off-at-runtime
+
+tpu_edge pcie_aspm=off pcie_port_pm=off
 
 ```
 :~/pycoral $ python3 examples/classify_image.py   --model test_data/mobilenet_v2_1.0_224_inat_bird_quant_edgetpu.tflite   --labels test_data/inat_bird_labels.txt   --input test_data/parrot.jpg
