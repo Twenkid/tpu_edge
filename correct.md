@@ -7,7 +7,45 @@ bash cat.sh
 wget https://github.com/google-coral/pycoral/releases/download/v2.0.0/tflite_runtime-2.5.0.post1-cp39-cp39-linux_aarch64.whl 
 pip install tflite_runtime-2.5.0.post1-cp39-cp39-linux_aarch64.whl 
 
+https://github.com/raspberrypi/libcamera
+
+
+https://github.com/raspberrypi/rpicam-apps
+#instead of libcamera-
+sudo apt install rpicam-apps
 ...
+
+
+https://github.com/raspberrypi/pykms
+sudo apt install -y libkms++-dev libfmt-dev libdrm-dev
+pip install rpi-kms
+
+
+
+git branch --show-current
+git branch
+
+http://archive.raspberrypi.org/debian/dists/bullseye/main/
+https://github.com/raspberrypi/pylibcamera/tree/main
+
+sudo apt install -y libcamera-dev
+pip install rpi-libcamera
+https://github.com/raspberrypi/pylibcamera/blob/main/README.md
+
+System and Date	libcamera Reported Version	Pip Package Version
+Raspberry Pi Bookworm 27/01/2025	v0.4.0+50-83cb8101	0.1a8
+Raspberry Pi Bookworm 19/11/2024	v0.3.2+99-1230f78d	0.1a7
+
+ System and Date | libcamera Reported Version | Pip Package Version |
+| --------------- | -------------------------- | ------------------- |
+| Raspberry Pi Bookworm 27/01/2025 | v0.4.0+50-83cb8101 | 0.1a8
+
+https://github.com/raspberrypi/picamera2/issues/503
+
+sudo apt install -y libkms++-dev libfmt-dev libdrm-dev
+pip install rpi-kms
+sudo apt-get install libcap-dev
+pip install picamera2
 
 ```
 
