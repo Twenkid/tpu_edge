@@ -47,6 +47,11 @@ pip install rpi-kms
 sudo apt-get install libcap-dev
 pip install picamera2
 
+
+
+https://github.com/DeGirum/yolov5-quantization/tree/master
+COCO dataset downloads ...
+
 ```
 
 
