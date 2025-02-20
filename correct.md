@@ -52,7 +52,15 @@ pip install picamera2
 https://github.com/DeGirum/yolov5-quantization/tree/master
 COCO dataset downloads ...
 
+
+
 ```
+https://aallan.medium.com/google-releases-new-efficientnet-edgetpu-models-for-coral-hardware-39c3f3f734bf    2019
+
+https://github.com/DeGirum/yolov5-quantization/tree/master
+
+https://github.com/google-coral/edgetpu/tree/master/test_data
+
 
 
 https://github.com/margaretmz/awesome-tensorflow-lite
