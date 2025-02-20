@@ -1,3 +1,19 @@
+```
+/pycoral
+/example-camera
+/tosh2
+bash cat.sh
+
+wget https://github.com/google-coral/pycoral/releases/download/v2.0.0/tflite_runtime-2.5.0.post1-cp39-cp39-linux_aarch64.whl 
+pip install tflite_runtime-2.5.0.post1-cp39-cp39-linux_aarch64.whl 
+
+...
+
+```
+
+
+https://github.com/margaretmz/awesome-tensorflow-lite
+
 https://github.com/google-coral/pycoral/blob/master/examples/classify_image.py#L41
 
 https://github.com/google-coral/pycoral/tree/master/examples
