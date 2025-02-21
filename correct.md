@@ -1,8 +1,13 @@
 ```
+
+https://pimylifeup.com/raspberry-pi-watchdog/
+
+
 /pycoral
 /example-camera
 /tosh2
 bash cat.sh
+
 
 wget https://github.com/google-coral/pycoral/releases/download/v2.0.0/tflite_runtime-2.5.0.post1-cp39-cp39-linux_aarch64.whl 
 pip install tflite_runtime-2.5.0.post1-cp39-cp39-linux_aarch64.whl 
