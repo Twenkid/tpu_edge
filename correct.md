@@ -1,12 +1,143 @@
+* Diagnostics
+```
+sudo watch -n 0.2 vcgencmd pmic_read_adc
+sudo watch -n 0.2 vcgencmd measure_volts
 ```
 
+At least 4A-5A power supply.
+
+Our system: Raspberry 5 8 GB RAM
+
+We used 5A original Raspberry 5 power supply and a 5A UPS:
+https://www.dfrobot.com/product-2840.html
+
+M2-hat:
+https://52pi.com/products/m01-m-2-2242-e-key-top
+
+**Final solution:**
+
+sudo nano /boot/firmware/config.txt
+
+dtparam=pciex1_gen=1
+
+The device and the used hat is supposed to support gen=2, but when it runs it is very slowly (lastly 1350 ms per inference **vs 6-7 ms for gen=1**).
+
+```
+-------RESULTS--------
+----INFERENCE TIME----
+Note: The first inference on Edge TPU is slow because it includes loading the model into Edge TPU memory.
+39.7ms
+-------RESULTS--------
+[cat3.jpg]
+Egyptian cat: 0.36328
+tiger cat: 0.30078
+tabby, tabby cat: 0.20312
+----INFERENCE TIME----
+Note: The first inference on Edge TPU is slow because it includes loading the model into Edge TPU memory.
+7.0ms
+-------RESULTS--------
+[9-360.jpg]
+hog, pig, grunter, squealer, Sus scrofa: 0.02344
+Arctic fox, white fox, Alopex lagopus: 0.01953
+coyote, prairie wolf, brush wolf, Canis latrans: 0.01562
+----INFERENCE TIME----
+Note: The first inference on Edge TPU is slow because it includes loading the model into Edge TPU memory.
+6.8ms
+-------RESULTS--------
+[cat1.jpg]
+Egyptian cat: 0.38281
+tabby, tabby cat: 0.21484
+tiger cat: 0.19531
+----INFERENCE TIME----
+Note: The first inference on Edge TPU is slow because it includes loading the model into Edge TPU memory.
+6.8ms
+-------RESULTS--------
+[cat2.jpg]
+Egyptian cat: 0.70312
+tabby, tabby cat: 0.13672
+tiger cat: 0.08594
+----INFERENCE TIME----
+Note: The first inference on Edge TPU is slow because it includes loading the model into Edge TPU memory.
+6.8ms
+-------RESULTS--------
+[cat4.jpg]
+tiger cat: 0.42578
+tabby, tabby cat: 0.35156
+Egyptian cat: 0.17969
+
+
+
+------RESULTS-------- [450]
+person
+  id:     0
+  score:  0.671875
+  bbox:   BBox(xmin=2, ymin=75, xmax=332, ymax=595)
+8.60 ms
+-------RESULTS-------- [475]
+dog
+  id:     17
+  score:  0.55859375
+  bbox:   BBox(xmin=11, ymin=1, xmax=328, ymax=374)
+8.67 ms
+-------RESULTS-------- [500]
+dog
+  id:     17
+  score:  0.5
+  bbox:   BBox(xmin=1, ymin=1, xmax=330, ymax=396)
+8.58 ms
+
+```
+...
+
+**Initial Problems**
+
+Sometimes runs, but extremely slowly (inference time 5000 ms (5 runs)), then can't open the device (see errors, dmesg, ...). When the device is plugged out and in programmatically it sometimes started to run again, but after some runs - it stopped again. Once it started to run very fast with inference time of 60-70 ms. However then when trying many inferences in short bursts on video - it "jammed the whole Pi and slowed down the whole computer which became inaccessible.
+
+```
 https://pimylifeup.com/raspberry-pi-watchdog/
 
+home/pi/ -->
 
 /pycoral
 /example-camera
 /tosh2
+
+#cd /home/pi/pycoral/ bash cat.sh
+
+cd /home/pi/pycoral/
+
+Classify several images:
 bash cat.sh
+
+Detect or classify frames in video:
+
+bash vid.sh
+bash vidclas.sh
+
+nano examples/classify_image.py
+nano examples/classify_video.py
+nano examples/detect_video.py
+nano examples/detect_image.py
+
+Added code in classify_image for a higher verbosity:
+
+from pycoral.pybind._pywrap_coral import SetVerbosity as set_verbosity
+set_verbosity(10)
+
+/pycoral/cat.sh
+/pycoral/vid.sh
+
+test_data/
+--> models
+tf2_mobilenet_v1_1.0_224_ptq_edgetpu.tflite
+tfhub_tf2_resnet_50_imagenet_ptq_edgetpu.tflite
+tf2_mobilenet_v3_edgetpu_1.0_224_ptq.tflite
+etc.
+
+* Labels for different models
+
+--labels test_data/imagenet_labels.txt
+--labels test_data/coco_labels.txt
 
 
 wget https://github.com/google-coral/pycoral/releases/download/v2.0.0/tflite_runtime-2.5.0.post1-cp39-cp39-linux_aarch64.whl 
@@ -87,7 +218,14 @@ https://github.com/google-coral/edgetpu/issues/491
 https://serverfault.com/questions/226319/what-does-pcie-aspm-do
 https://serverfault.com/questions/810411/setting-pcie-aspm-off-at-runtime
 
-tpu_edge pcie_aspm=off pcie_port_pm=off
+sudo cat /boot/firmware/cmdline.txt
+console=serial0,115200 console=tty1 root=PARTUUID=066aa0b4-02 rootfstype=ext4 fsck.repair=yes rootwait quiet splash plymouth.ignore-serial-consoles cfg80211.ieee80
+
+Added:
+pcie_aspm=off pcie_port_pm=off
+
+sudo nano /boot/firmware/cmdline.txt 
+
 
 ```
 :~/pycoral $ python3 examples/classify_image.py   --model test_data/mobilenet_v2_1.0_224_inat_bird_quant_edgetpu.tflite   --labels test_data/inat_bird_labels.txt   --input test_data/parrot.jpg
