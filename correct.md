@@ -2,6 +2,14 @@
 ```
 sudo watch -n 0.2 vcgencmd pmic_read_adc
 sudo watch -n 0.2 vcgencmd measure_volts
+
+Temperature of google-coral:
+
+watch -n 1 cat /sys/class/thermal/thermal_zone0/temp
+
+https://coral.ai/docs/pcie-parameters/#read-the-edge-tpu-temperature
+https://github.com/google-coral/edgetpu/issues/102#issuecomment-631442554
+
 ```
 
 At least 4A-5A power supply.
@@ -225,6 +233,51 @@ Added:
 pcie_aspm=off pcie_port_pm=off
 
 sudo nano /boot/firmware/cmdline.txt 
+
+...
+
+https://github.com/jveitchmichaelis/edgetpu-yolo
+
+git clone https://github.com/jveitchmichaelis/edgetpu-yolo
+
+cd edgetpu-yolo
+
+python3 detect.py -m yolov5s-int8-224_edgetpu.tflite --bench_image
+
+Download Coco dataset (validation)
+https://cocodataset.org/#download
+
+wget http://images.cocodataset.org/zips/val2017.zip
+800 MB
+
+mkdir data/coco
+
+pi@pi5-coral:~ $ unzip val2017.zip  -d data/coco/images/
+Archive:  val2017.zip
+   creating: data/coco/
+ extracting: data/coco/val2017/000000212226.jpg
+ extracting: data/coco/val2017/000000231527.jpg
+ extracting: data/coco/val2017/000000578922.jpg
+ 
+'''
+cd ~/edgetpu-yolo
+
+python3 detect.py -m yolov5s-int8-224_edgetpu.tflite --bench_coco --coco_path /home/pi/data/coco/images/val2017/ -q  
+
+python3 detect.py -m yolov5s-int8-224_edgetpu.tflite --bench_coco --coco_path /home/pi/data/coco/images/val2017/    
+(no q - more verbose)
+
+
+
+python3 eval_coco.py --coco_path /home/josh/data/coco/images/val2017/ --pred_pat ./coco_eval/yolov5s-int8-192_edgetpu.tflite_predictions.json --gt_path /home/josh/data/coco/annotations/instances_val2017.json
+
+
+
+
+'''
+
+
+_Wasn't that easy? You can swap out different models and try other images if you like. You should see an inference speed of around 25 fps with a 224x224 px input model._
 
 
 ```
@@ -751,12 +804,6 @@ I driver/kernel/kernel_registers.cc:122] Closing /dev/apex_0. mmap_offset=0x0000
 I driver/kernel/kernel_registers.cc:122] Closing /dev/apex_0. mmap_offset=0x0000000000044000, mmap_size=4096, read_only=0
 I driver/kernel/kernel_registers.cc:122] Closing /dev/apex_0. mmap_offset=0x0000000000048000, mmap_size=4096, read_only=0
 :~/pycoral $
-
-
-
-
-
-
-
+```
 
 
