@@ -98,7 +98,18 @@ dog
 8.58 ms
 
 ```
-Expected benchmark results (per single TPU)
+Expected benchmark results according to: (per single TPU or both?) (not on a Pi)
+..............................| ours
+Inception v1 (224x224)	3.4 ms| 6.6 ms
+Inception v4 (299x299)	85 ms | 196.2 ms
+
+...
+196.2ms
+-------RESULTS--------
+[cat1.jpg]
+Egyptian cat: 0.80469
+tabby, tabby cat: 0.12109
+tiger cat: 0.03516
 
 https://coral.ai/docs/edgetpu/benchmarks/
 
