@@ -95,6 +95,12 @@ dog
 8.58 ms
 
 ```
+Expected benchmark results (per single TPU)
+
+https://coral.ai/docs/edgetpu/benchmarks/
+
+Ours has 2: to do - try two in parallel.
+
 ...
 
 **Initial Problems**
