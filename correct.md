@@ -31,6 +31,9 @@ dtparam=pciex1_gen=1
 The device and the used hat is supposed to support gen=2, but when it runs it is very slowly (lastly 1350 ms per inference **vs 6-7 ms for gen=1**).
 
 ```
+
+--model test_data/inception_v1_224_quant_edgetpu.tflite
+
 -------RESULTS--------
 ----INFERENCE TIME----
 Note: The first inference on Edge TPU is slow because it includes loading the model into Edge TPU memory.
@@ -100,6 +103,8 @@ Expected benchmark results (per single TPU)
 https://coral.ai/docs/edgetpu/benchmarks/
 
 Ours has 2: to do - try two in parallel.
+Several tests & yolo: Failed to load delegate from libedgetpu.so.1 - it couldn't inference with  two models at once.
+
 
 ...
 
